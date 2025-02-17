@@ -35,13 +35,4 @@ jobs:
           name: proxychains-portable  
           path: |
             /myapp/*
-            #/lib/x86_64-linux-gnu/libc.so.6
-
-      - name: test
-        run: |
-          ls
-          echo "Sebelum"
-          curl ifconfig.me
-          echo "Sesudah"
-          #LD_LIBRARY_PATH=$(pwd) ./proxychains4 -f /src/proxychains.conf curl ifconfig.me
-          ./proxychains4 -f /src/proxychains.conf curl ifconfig.me
+            

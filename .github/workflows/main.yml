@@ -27,6 +27,7 @@ jobs:
           make clean
           make VERBOSE=1
           make install
+          ls
           ls -R $HOME/myapp
 
       - name: Upload Artifact

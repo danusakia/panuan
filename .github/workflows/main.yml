@@ -6,7 +6,6 @@ on:
   pull_request:
     branches: [ master, main ]
 
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,24 +14,23 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Install
+      - name: Install Dependencies
         run: |
-          ls
-          sudo apt-get update && sudo apt-get install gcc libcurl4-openssl-dev libcjson-dev -y
+          sudo apt-get update
+          sudo apt-get install gcc libcurl4-openssl-dev libcjson-dev -y
 
       - name: Compile
         run: |
-          chmod u+x *
-          ./configure --prefix=$HOME/myapp
-          make clean
-          make
-          make install
           ls
+          chmod u+x *
+          ./configure --prefix=$HOME/myapp || cat config.log
+          make clean
+          make VERBOSE=1
+          make install
+          ls -R $HOME/myapp
 
-      - name: Upload Artifact  
-        uses: actions/upload-artifact@v4  
-        with:  
-          name: proxychains-portable  
-          path: |
-            /myapp/*
-            
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: proxychains-portable
+          path: $HOME/myapp/*

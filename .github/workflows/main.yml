@@ -37,4 +37,5 @@ jobs:
         with:
           name: proxychains-portable
           path: |
-            /home/runner/myapp/**
+            myapp.tar.gz
+            #/home/runner/myapp/**

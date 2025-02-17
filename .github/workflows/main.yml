@@ -23,10 +23,10 @@ jobs:
       - name: Compile
         run: |
           chmod u+x *
-          sudo ./configure
-          sudo make clean
-          sudo make
-          sudo make install
+          ./configure --prefix=$HOME/myapp
+          make clean
+          make
+          make install
           ls
 
       - name: Upload Artifact  
@@ -34,8 +34,7 @@ jobs:
         with:  
           name: proxychains-portable  
           path: |
-            proxychains4
-            libproxychains.so.4
+            /myapp/*
             #/lib/x86_64-linux-gnu/libc.so.6
 
       - name: test

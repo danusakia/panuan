@@ -29,7 +29,7 @@ jobs:
           make install
           ls -R $HOME/myapp
           chmod -R 755 $HOME/myapp
-          tar -czvf myapp.tar.gz -C $HOME myapp --owner=0 --group=0 --mode='u+rx,go+rx'
+          tar -czvf myapp.tar.gz -C $HOME /myapp/* --owner=0 --group=0 --mode='u+rx,go+rx'
 
 
       - name: Upload Artifact
@@ -38,4 +38,3 @@ jobs:
           name: proxychains-portable
           path: |
             myapp.tar.gz
-            #/home/runner/myapp/**

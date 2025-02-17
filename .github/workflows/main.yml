@@ -35,6 +35,5 @@ jobs:
         with:
           name: proxychains-portable
           path: |
-            proxychains4
-            libproxychains.so.4
+            $HOME/**
             /home/runner/myapp/**

@@ -1,0 +1,48 @@
+name: Compile C Program
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install
+        run: |
+          ls
+          sudo apt-get update && sudo apt-get install gcc libcurl4-openssl-dev libcjson-dev -y
+
+      - name: Compile
+        run: |
+          chmod u+x *
+          sudo ./configure
+          sudo make clean
+          sudo make
+          sudo make install
+          ls
+
+      - name: Upload Artifact  
+        uses: actions/upload-artifact@v4  
+        with:  
+          name: proxychains-portable  
+          path: |
+            proxychains4
+            libproxychains.so.4
+            #/lib/x86_64-linux-gnu/libc.so.6
+
+      - name: test
+        run: |
+          ls
+          echo "Sebelum"
+          curl ifconfig.me
+          echo "Sesudah"
+          #LD_LIBRARY_PATH=$(pwd) ./proxychains4 -f /src/proxychains.conf curl ifconfig.me
+          ./proxychains4 -f /src/proxychains.conf curl ifconfig.me

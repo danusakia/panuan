@@ -25,14 +25,16 @@ jobs:
           chmod u+x *
           ./configure --prefix=$HOME/myapp || cat config.log
           make clean
-          make VERBOSE=1 LDFLAGS=-static
-          ls -R .
+          make VERBOSE=1
+          make install
           ls -R $HOME/myapp
+          chmod -R 755 $HOME/myapp
+          tar -czvf myapp.tar.gz -C $HOME myapp --owner=0 --group=0 --mode='u+rx,go+rx'
+
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: proxychains-portable
           path: |
-            $HOME/**
             /home/runner/myapp/**

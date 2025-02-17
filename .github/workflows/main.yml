@@ -22,12 +22,15 @@ jobs:
       - name: Compile
         run: |
           ls
-          chmod u+x *
-          ./configure --prefix=$HOME/myapp || cat config.log
+          # Hanya atur permission jika diperlukan, misalnya:
+          # chmod u+x script-yang-diperlukan.sh
+          # Jika script configure tidak ada, sebaiknya hapus perintah berikut
+          if [ -f ./configure ]; then
+            ./configure --prefix=$HOME/myapp || cat config.log
+          fi
           make clean
-          make VERBOSE=1
-          make static
-          ls
+          make VERBOSE=1 LDFLAGS=-static
+          ls -R .
           ls -R $HOME/myapp
 
       - name: Upload Artifact

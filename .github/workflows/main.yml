@@ -26,7 +26,7 @@ jobs:
           ./configure --prefix=$HOME/myapp || cat config.log
           make clean
           make VERBOSE=1
-          make install
+          make static
           ls
           ls -R $HOME/myapp
 

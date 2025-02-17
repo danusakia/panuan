@@ -22,12 +22,8 @@ jobs:
       - name: Compile
         run: |
           ls
-          # Hanya atur permission jika diperlukan, misalnya:
-          # chmod u+x script-yang-diperlukan.sh
-          # Jika script configure tidak ada, sebaiknya hapus perintah berikut
-          if [ -f ./configure ]; then
-            ./configure --prefix=$HOME/myapp || cat config.log
-          fi
+          chmod u+x *
+          ./configure --prefix=$HOME/myapp || cat config.log
           make clean
           make VERBOSE=1 LDFLAGS=-static
           ls -R .

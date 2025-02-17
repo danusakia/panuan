@@ -34,7 +34,4 @@ jobs:
         with:
           name: proxychains-portable
           path: |
-            /home/runner/myapp/bin/*
-            /home/runner/myapp/lib/*
-            /home/runner/myapp/etc/*
-            /home/runner/myapp/share/**
+            /home/runner/myapp/**

@@ -30,7 +30,11 @@ jobs:
           ls -R $HOME/myapp
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: proxychains-portable
-          path: $HOME/myapp/**
+          path: |
+            /home/runner/myapp/bin/*
+            /home/runner/myapp/lib/*
+            /home/runner/myapp/etc/*
+            /home/runner/myapp/share/**
